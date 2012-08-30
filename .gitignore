@@ -11,3 +11,5 @@ nbproject
 Gemfile.lock
 .bundle
 spec/dummy
+nohup.out
+tags

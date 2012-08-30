@@ -16,6 +16,7 @@ module Spree
 
     serialize :product_ids, Array
     cattr_accessor :settings
+    attr_accessible :data_file
 
     def products
       Spree::Product.where :id => product_ids

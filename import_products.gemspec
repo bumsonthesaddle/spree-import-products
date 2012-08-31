@@ -14,8 +14,7 @@ Gem::Specification.new do |s|
   s.require_path = 'lib'
   s.requirements << 'none'
 
-  s.add_dependency('spree_core', '~> 1.1.0')
-  s.add_dependency('spree_auth', '~> 1.1.0')
+  s.add_dependency('spree_core', '~> 1.2.0')
   s.add_dependency('delayed_job_active_record')
 
   s.add_development_dependency('spree_sample')

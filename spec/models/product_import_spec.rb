@@ -22,11 +22,11 @@ module Spree
       end
 
       it "creates a new variant when product already exist" do
-        product.variants_with_only_master.count.should == 1
+        product.variants.count.should == 0
         expect do
           ProductImport.new.send(:create_variant_for, product, :with => params)
         end.to change(product.variants, :count).by(1)
-        product.variants_with_only_master.count.should == 1
+        product.variants.count.should == 1
         variant = product.variants.last
         variant.price.to_f.should == 54.46
         variant.cost_price.to_f.should == 29.25

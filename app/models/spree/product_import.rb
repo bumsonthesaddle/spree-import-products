@@ -229,7 +229,11 @@ module Spree
         if product.respond_to?("#{field}=")
           product.send("#{field}=", value)
         elsif property = Spree::Property.where(["name = ?", field]).first
-          product.product_properties.build :value => value, :property => property
+          product_property = Spree::ProductProperty.new
+          product_property.value = value
+          product_property.property = property
+          product_property.product = product
+          product.product_properties << product_property
         end
       end
 

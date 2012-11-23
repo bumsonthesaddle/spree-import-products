@@ -31,6 +31,7 @@ Spree::ProductImport.settings = {
   :variant_comparator_field => :permalink, #Which product field to detect duplicates on
   :multi_domain_importing => true, #If Spree's multi_domain extension is installed, associates products with store
   :store_field => :store_code, #Which field of the column mappings contains either the store id or store code?
-  :transaction => true #import product in a sql transaction so we can rollback when an exception is raised
+  :transaction => true, #import product in a sql transaction so we can rollback when an exception is raised
+  :update_only => false
 }
 

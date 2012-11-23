@@ -101,6 +101,8 @@ module Spree
         end
 
         log("Importing products for #{self.data_file_file_name} began at #{Time.now}")
+
+
         rows[Spree::ProductImport.settings[:rows_to_skip]..-1].each do |row|
 
           product_information = {}
@@ -118,6 +120,18 @@ module Spree
 
           #Manually set available_on if it is not already set
           product_information[:available_on] = Date.today - 1.day if product_information[:available_on].nil?
+
+          if Spree::ProductImport.settings[:update_only]
+            variant = Spree::Variant.find_by_sku product_information[:sku] 
+            unless variant
+              log("Variant to Update does not exist. Sku was - #{product_information[:sku]}")
+              next
+            end
+            row << variant.product.permalink
+            col.merge!(:permalink => row.size - 1)
+            log("row - #{row.inspect}")
+            log("col - #{col.inspect}")
+          end
           log("#{pp product_information}")
 
           variant_comparator_field = Spree::ProductImport.settings[:variant_comparator_field].try :to_sym
